@@ -13,7 +13,7 @@ tailscale status --json=true --active=true --self=true
 #+end_src
 
 ** Installation
-To use this widget, clone this repository on your Qtile configuration file directory, usually =~/.config/qtile/=.
+To use this widget, clone this repository on your Qtile configuration file directory, usually ~~/.config/qtile/~.
 
 #+begin_src bash
 cd ~/.config/qtile/
@@ -55,7 +55,7 @@ With this parameter, you can associate the output format, foreground and backgro
 
 If no foreground or background is defined for a backend_state, the widget falls back to the widget general configuration (foreground and background parameters).
 
-The format parameter defaults to ="{backend_state}"= and allows special text output, you can use the following placeholders to add informations about the tailscaled status:
+The format parameter defaults to ~"{backend_state}"~ and allows special text output, you can use the following placeholders to add informations about the tailscaled status:
 
 + backend_state
 + tailscale_ipv4
