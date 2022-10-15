@@ -1,0 +1,129 @@
+* Tailscale Status Widget for Qtile
+** Description
+A Qtile widget displaying the tailscaled daemon status and its connection.
+
+On the back, the widget calls the following command and parses the output to display the configured formatted text.
+
+#+begin_src bash
+tailscale status --json=true --active=true --self=true
+#+end_src
+
+** Installation
+To use this widget, clone this repository on the same directory as your Qtile configuration file.
+
+#+begin_src bash
+cd ~/.config/qtile/
+git clone https://github.com/clement-dufour/qtile-tailscale-widget.git
+#+end_src
+
+Import the widget on your configuration file.
+
+#+begin_src python
+from qtile-tailscale-widget import Tailscale
+#+end_src
+
+Add the widget as any other widget on the widget list on a Bar instance.
+
+#+begin_src python
+screens = [
+    Screen(
+        top=bar.Bar(
+            [
+                Tailscale(),
+            ],
+        )
+    )
+]
+#+end_src
+
+** Configuration
+The Tailscale widget inherits from the Qtile's base.ThreadPoolText widget so it inherits its configuration options. One specific parameter is added for this widget called display_formats.
+
+This parameter is a dictionary that allows special formatting depending on the tailscale backend state. Here is a non-comprehensive list of known backend states:
+
++ RunningUsingExitNode
++ Running
++ Stopped
++ Starting
++ NoState
+
+With this parameter, you can associate the output format, foreground and background of each backend state.
+
+If no foreground or background is defined for a backend_state, the widget falls back to the widget general configuration (foreground and background parameters).
+
+The format parameter defaults to ="{backend_state}"= and allows special text output, you can use the following placeholders to add informations about the tailscaled status:
+
++ backend_state
++ tailscale_ipv4
++ tailscale_ipv6
++ public_ip
++ local_ip
++ exit_node_hostname
++ exit_node_ipv4
++ exit_node_ipv6
++ exit_node_public_ip
+
+** Examples
+*** Special text formatting
+With the following configuration, when tailscaled is running, the widget displays the custom text and the machine's tailnet IPv4 address colored in green. When tailscale is stopped, the custom text is colored in red. For any other situation, the widget displays the raw backend state text.
+
+#+begin_src python
+screens = [
+    Screen(
+        top=bar.Bar(
+            [
+                Tailscale(
+                    display_formats = {
+                        "Running": {
+                            "format": "Tailscale running ({tailscale_ipv4})",
+                            "foreground": "#008000",
+                        },
+                        "Stopped": {
+                            "format": "Tailscale stopped!",
+                            "background": "#ff0000",
+                        },
+                    },
+                ),
+            ],
+        )
+    )
+]
+#+end_src
+
+*** Integration with qtile-extras decorators
+With per-backend-state background colors, this widget is well integrated with [[https://github.com/elParaguayo/qtile-extras][elParaguayo's qtile-extras]] decorators.
+
+#+begin_src python
+from qtile_extras.widget import modify
+from qtile-tailscale-widget import Tailscale
+
+screens = [
+    Screen(
+        top=bar.Bar(
+            [
+                modify(
+                    Tailscale,
+                    display_formats={
+                        "RunningUsingExitNode": {
+                            "format": "Exit through {exit_node_hostname} ({exit_node_ipv4})",
+                            "background": "#008000",    #Green
+                        },
+                        "Stopped": {
+                            "background": "#ffa500",    #Orange
+                        },
+                    },
+                    update_interval=1,
+                    foreground="#000000",
+                    background="#ffffff",
+                    decorations=[
+                        RectDecoration(
+                            filled=True,
+                            use_widget_background=True, #Allows widget's background passthrough
+                        ),
+                    ],
+                ),
+            ],
+        )
+    )
+]
+#+end_src
