@@ -1,6 +1,6 @@
 * Tailscale Status Widget for Qtile
 ** Description
-A Qtile widget displaying the tailscaled daemon status and its connection.
+A [[https://github.com/qtile/qtile][Qtile]] widget displaying the tailscaled daemon status and its connection.
 
 On the back, the widget calls the following command and parses the output to display the configured formatted text.
 
@@ -9,7 +9,7 @@ tailscale status --json=true --active=true --self=true
 #+end_src
 
 ** Installation
-To use this widget, clone this repository on the same directory as your Qtile configuration file.
+To use this widget, clone this repository on your Qtile configuration file directory, usually =~/.config/qtile/=.
 
 #+begin_src bash
 cd ~/.config/qtile/
