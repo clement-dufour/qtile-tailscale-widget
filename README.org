@@ -4,7 +4,7 @@
   [[./screenshots/example01_stopped.png]]
 
 ** Description
-A [[https://github.com/qtile/qtile][Qtile]] widget displaying the tailscaled daemon status and its connection.
+A [[https://github.com/qtile/qtile][Qtile]] widget displaying the tailscaled daemon and its connections status.
 
 On the back, the widget calls the following command and parses the output to display the configured formatted text.
 
