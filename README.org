@@ -67,7 +67,18 @@ The format parameter defaults to ="{backend_state}"= and allows special text out
 *** Special text formatting
 With the following configuration, when tailscaled is running, the widget displays the custom text and the machine's tailnet IPv4 address colored in green. When tailscale is stopped, the custom text is colored in red. For any other situation, the widget displays the raw backend state text.
 
++ Tailscale running
+  [[./screenshots/example01_running.png]]
+
++ Tailscale stopped
+  [[./screenshots/example01_stopped.png]]
+
+
 #+begin_src python
+from libqtile import bar
+from libqtile.config import Screen
+from qtile-tailscale-widget import Tailscale
+
 screens = [
     Screen(
         top=bar.Bar(
@@ -76,13 +87,14 @@ screens = [
                     display_formats = {
                         "Running": {
                             "format": "Tailscale running ({tailscale_ipv4})",
-                            "foreground": "#008000",
+                            "foreground": "#a6da95",
                         },
                         "Stopped": {
                             "format": "Tailscale stopped!",
-                            "background": "#ff0000",
+                            "foreground": "#ed8796",
                         },
                     },
+                    update_interval=1,
                 ),
             ],
         )
@@ -93,7 +105,19 @@ screens = [
 *** Integration with qtile-extras decorators
 With per-backend-state background colors, this widget is well integrated with [[https://github.com/elParaguayo/qtile-extras][elParaguayo's qtile-extras]] decorators.
 
++ Tailscale running using an exit node
+  [[./screenshots/example02_exitnode.png]]
+
++ Tailscale running
+  [[./screenshots/example02_running.png]]
+
++ Tailscale stopped
+  [[./screenshots/example02_stopped.png]]
+
+
 #+begin_src python
+from libqtile import bar
+from libqtile.config import Screen
 from qtile_extras.widget import modify
 from qtile-tailscale-widget import Tailscale
 
@@ -106,10 +130,10 @@ screens = [
                     display_formats={
                         "RunningUsingExitNode": {
                             "format": "Exit through {exit_node_hostname} ({exit_node_ipv4})",
-                            "background": "#008000",    #Green
+                            "background": "#a6da95",    #Green
                         },
                         "Stopped": {
-                            "background": "#ffa500",    #Orange
+                            "background": "#ed8796",    #Red
                         },
                     },
                     update_interval=1,
@@ -117,7 +141,11 @@ screens = [
                     background="#ffffff",
                     decorations=[
                         RectDecoration(
+                            radius=2,
                             filled=True,
+                            padding=0,
+                            padding_x=4,
+                            padding_y=4,
                             use_widget_background=True, #Allows widget's background passthrough
                         ),
                     ],
