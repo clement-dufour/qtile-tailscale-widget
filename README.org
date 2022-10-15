@@ -1,4 +1,8 @@
 * Tailscale Status Widget for Qtile
+
+  [[./screenshots/example01_running.png]]
+  [[./screenshots/example01_stopped.png]]
+
 ** Description
 A [[https://github.com/qtile/qtile][Qtile]] widget displaying the tailscaled daemon status and its connection.
 
@@ -68,9 +72,11 @@ The format parameter defaults to ="{backend_state}"= and allows special text out
 With the following configuration, when tailscaled is running, the widget displays the custom text and the machine's tailnet IPv4 address colored in green. When tailscale is stopped, the custom text is colored in red. For any other situation, the widget displays the raw backend state text.
 
 + Tailscale running
+
   [[./screenshots/example01_running.png]]
 
 + Tailscale stopped
+
   [[./screenshots/example01_stopped.png]]
 
 
@@ -106,12 +112,15 @@ screens = [
 With per-backend-state background colors, this widget is well integrated with [[https://github.com/elParaguayo/qtile-extras][elParaguayo's qtile-extras]] decorators.
 
 + Tailscale running using an exit node
+
   [[./screenshots/example02_exitnode.png]]
 
 + Tailscale running
+
   [[./screenshots/example02_running.png]]
 
 + Tailscale stopped
+
   [[./screenshots/example02_stopped.png]]
 
 
