@@ -68,14 +68,14 @@ The format parameter defaults to ="{backend_state}"= and allows special text out
 + exit_node_public_ip
 
 ** Examples
-*** Special text formatting
+*** Example n°1: Custom status text and colored foreground
 With the following configuration, when tailscaled is running, the widget displays the custom text and the machine's tailnet IPv4 address colored in green. When tailscale is stopped, the custom text is colored in red. For any other situation, the widget displays the raw backend state text.
 
-+ Tailscale running
++ Running
 
   [[./screenshots/example01_running.png]]
 
-+ Tailscale stopped
++ Stopped
 
   [[./screenshots/example01_stopped.png]]
 
@@ -108,18 +108,18 @@ screens = [
 ]
 #+end_src
 
-*** Integration with qtile-extras decorators
+*** Example n°2: Integration with qtile-extras decorators
 With per-backend-state background colors, this widget is well integrated with [[https://github.com/elParaguayo/qtile-extras][elParaguayo's qtile-extras]] decorators.
 
-+ Tailscale running using an exit node
++ Running using an exit node
 
   [[./screenshots/example02_exitnode.png]]
 
-+ Tailscale running
++ Running
 
   [[./screenshots/example02_running.png]]
 
-+ Tailscale stopped
++ Stopped
 
   [[./screenshots/example02_stopped.png]]
 
