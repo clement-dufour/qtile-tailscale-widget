@@ -83,7 +83,7 @@ With the following configuration, when tailscaled is running, the widget display
 #+begin_src python
 from libqtile import bar
 from libqtile.config import Screen
-from qtile-tailscale-widget import Tailscale
+from qtile-tailscale-widget.tailscale import Tailscale
 
 screens = [
     Screen(
@@ -128,7 +128,7 @@ With per-backend-state background colors, this widget is well integrated with [[
 from libqtile import bar
 from libqtile.config import Screen
 from qtile_extras.widget import modify
-from qtile-tailscale-widget import Tailscale
+from qtile-tailscale-widget.tailscale import Tailscale
 
 screens = [
     Screen(
