@@ -23,7 +23,7 @@ git clone https://github.com/clement-dufour/qtile-tailscale-widget.git
 Import the widget on your configuration file.
 
 #+begin_src python
-from qtile-tailscale-widget import Tailscale
+from qtile-tailscale-widget.tailscale import Tailscale
 #+end_src
 
 Add the widget as any other widget on the widget list on a Bar instance.
